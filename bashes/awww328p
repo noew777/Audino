@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Author: Noé Paniagua
+
+file=${1}
+path=${2}
+
+
+# Read correct amount of arguments
+if [[ $# -lt 2 ]]
+then 
+    echo "ERROR:More arguments: $ awww328p <filename.c> <Arduino path>"
+    exit 1
+fi
+
+if [[ "/dev/tty" != "${path:0:8}" ]]
+then
+    echo "ERROR:Second argument must be /dev/tty<name> instead of" $path
+    exit 1
+fi
+
+filename=$(echo $file | cut -d'.' -f1) 
+
+avr-gcc ${file} -o ${filename}.elf -mmcu=atmega328 -DF_CPU=16000000UL -Os
+avr-objcopy ${filename}.elf -O ihex ${filename}.hex
+avrdude -c arduino -p m328p -U flash:w:"${filename}.hex":a -P $path
+
+rm ${filename}.elf
+rm ${filename}.hex

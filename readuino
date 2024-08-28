@@ -1,0 +1,9 @@
+
+#!/bin/bash
+
+# Author: Noé Paniagua
+
+export PATH=$PATH:"/home/star/Documents/repos/Audino/bashes/"
+
+echo  "-> All is okay Noe... use awww328p to charge..."
+echo  "               ArduinoooOoooOO"
