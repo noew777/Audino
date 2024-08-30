@@ -21,9 +21,9 @@ fi
 
 filename=$(echo $file | cut -d'.' -f1) 
 
-avr-gcc ${file} -o ${filename}.elf -mmcu=atmega328 -DF_CPU=16000000UL -Os
+avr-gcc ${file} -o ${filename}.elf -mmcu=atmega328 -DF_CPU=16000000UL -Os 
 avr-objcopy ${filename}.elf -O ihex ${filename}.hex
-avrdude -c arduino -p m328p -U flash:w:"${filename}.hex":a -P $path
+avrdude -c arduino -p m328p -U flash:w:"${filename}.hex":a -P $path 
 
 rm ${filename}.elf
 rm ${filename}.hex
